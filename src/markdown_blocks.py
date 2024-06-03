@@ -20,6 +20,14 @@ def markdown_to_blocks(text):
         b.append(block)
     return b
 
+def markdown_to_html_node(markdown):
+    blocks = markdown_to_blocks(markdown)
+    children = []
+    for block in blocks:
+        html_node = block_to_html_node(block)
+        children.append(html_node)
+    return ParentNode("div", children, None)
+
 def block_to_block_type(text):
     lines = text.split("\n")
     if text[0] == "#" and text.strip("#")[0] == " ":
